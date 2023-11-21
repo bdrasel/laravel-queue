@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendMail;
+use App\Jobs\SendOtpJob;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,9 +26,17 @@ class RegisterController extends Controller
         // Create and save the user
         $user = User::create($attributes);
 
-        dispatch(new SendMail($user, (object) $request->all()));
+        for ($i = 0; $i < 50; $i++) {
+            dispatch(new SendMail($user, (object) $request->all()));
+        }
 
         // Redirect
         return redirect()->back()->with('success', 'Your account has been created.');
+    }
+
+    public function sendOtp()
+    {
+        dispatch(new SendOtpJob())->onQueue('high');
+        return redirect()->back()->with('success', 'OTP has been sent to your email.');
     }
 }

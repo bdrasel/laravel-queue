@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/register', [RegisterController::class, 'create']);
+Route::get('/', [RegisterController::class, 'create']);
 Route::post('/store', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/send-otp', [RegisterController::class, 'sendOtp'])->name('send.otp');

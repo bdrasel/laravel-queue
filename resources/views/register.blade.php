@@ -39,6 +39,7 @@
                         <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-info" href="{{ route('send.otp') }}">OTP Send</a>
                 </form>
             </div>
         </div>
